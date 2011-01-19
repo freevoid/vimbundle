@@ -1,0 +1,66 @@
+h1. Overview
+
+Vimbundle is a small python script that allows you to enable and disable vim plugins on a bundle level. It is very useful to be able to turn on and off vim stuff and to keep @~/.vim/@ clean and structured. It is based on "https://github.com/tpope/vim-pathogen":@pathogen@ and is VERY simple.
+
+I wrote this script because it is very easy to make a piece of chaos from a vim runpath with original approach. Every non-trivial plugin splits in several files (including docs, etc.) and it is sometimes painful to clean up @.vim@ from unused plugins.
+
+h1. Installation
+
+* Put @vimbundle@ from @bin/vimbundle@ to a directory from your @PATH@;
+* Install "https://github.com/tpope/vim-pathogen":@pathogen@ from author's repo or pick from here (copy @_vim/autoload/pathogen.vim@ to @~/.vim/autoload/@;
+* Create two empty directories in @~/.vim@: @bundles-available@ and @bundles-enabled@;
+* Put your vim bundles in first one and manage them through @vimbundle@!
+
+h1. About bundles
+
+Vim bundle in our context is just a collection of plugin-related files in standard directories like @plugin@, @ftplugin@, @autoload@, etc. Initial approach is to merge this directories with ones in @.vim@, but with bundles you can keep them in separate "bundles".
+
+h1. Usage
+
+Collect your bundles in @.vim/bundles-available/@, enable/disable them with vimbundle script.
+
+h2. Example
+
+Let see how our directory structure looks like with only one installed bundle (vimball):
+
+* @.vim/@
+** @autoload/@
+*** @pathogen.vim@
+** @bundles-available/@
+*** @vimball/@
+**** @plugin/@
+**** @doc/@
+**** @autoload/@
+** @bundles-enabled/@
+
+Now we can list available bundles:
+
+bc.. vimbundle list_available
+vimball
+
+p. Now lets enable @vimball@:
+
+bc.. vimbundle enable vimball
+Bundle vimball enabled
+
+p. Lets see available list again:
+
+bc.. vimbundle list_available
+*vimball
+
+p. To disable, we can do
+
+bc.. vimbundle disable vimball
+Bundle vimball disabled
+
+p. There are also @list_enabled@ subcommand, but @list_available@ should suffice too.
+
+Try @vimbundle@ without arguments to see available options.
+
+h1. Requirements
+
+* Vim (see @pathogen@ requirements)
+* Python (>= 2.6 or 2.5 with @python-argparse@ installed)
+
+(c) 2011, Nikolay Zakharov.
+

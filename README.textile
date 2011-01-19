@@ -9,7 +9,7 @@ h1. Installation
 * Put @vimbundle@ from to a directory from your @PATH@;
 * Install "https://github.com/tpope/vim-pathogen":pathogen from author's repo;
 * Add this to your @.vimrc@: @call pathogen#runtime_append_all_bundles("bundle-enabled")@
-* Create two empty directories in @~/.vim@: @bundles-available@ and @bundles-enabled@;
+* Create two empty directories in @~/.vim@: @bundle-available@ and @bundle-enabled@;
 * Put your vim bundles in first one and manage them through @vimbundle@!
 
 h1. About bundles
@@ -18,7 +18,7 @@ Vim bundle in our context is just a collection of plugin-related files in standa
 
 h1. Usage
 
-Collect your bundles in @.vim/bundles-available/@, enable/disable them with vimbundle script.
+Collect your bundles in @.vim/bundle-available/@, enable/disable them with vimbundle script.
 
 h2. Example
 
@@ -27,12 +27,12 @@ Let see how our directory structure looks like with only one installed bundle (v
 * @.vim/@
 ** @autoload/@
 *** @pathogen.vim@
-** @bundles-available/@
+** @bundle-available/@
 *** @vimball/@
 **** @plugin/@
 **** @doc/@
 **** @autoload/@
-** @bundles-enabled/@
+** @bundle-enabled/@
 
 Now we can list available bundles:
 

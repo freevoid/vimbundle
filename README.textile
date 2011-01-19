@@ -6,7 +6,7 @@ I wrote this script because it is very easy to make a piece of chaos from a vim 
 
 h1. Installation
 
-* Put @vimbundle@ from to a directory from your @PATH@;
+* Put @vimbundle@ to a directory that is on your @PATH@;
 * Install "https://github.com/tpope/vim-pathogen":pathogen from author's repo;
 * Add this to your @.vimrc@: @call pathogen#runtime_append_all_bundles("bundle-enabled")@
 * Create two empty directories in @~/.vim@: @bundle-available@ and @bundle-enabled@;

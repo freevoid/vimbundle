@@ -1,13 +1,14 @@
 h1. Overview
 
-Vimbundle is a small python script that allows you to enable and disable vim plugins on a bundle level. It is very useful to be able to turn on and off vim stuff and to keep @~/.vim/@ clean and structured. It is based on "https://github.com/tpope/vim-pathogen":@pathogen@ and is VERY simple.
+Vimbundle is a small python script that allows you to enable and disable vim plugins on a bundle level. It is very useful to be able to turn on and off vim stuff and to keep @~/.vim/@ clean and structured. It is based on "https://github.com/tpope/vim-pathogen":pathogen and is VERY simple.
 
 I wrote this script because it is very easy to make a piece of chaos from a vim runpath with original approach. Every non-trivial plugin splits in several files (including docs, etc.) and it is sometimes painful to clean up @.vim@ from unused plugins.
 
 h1. Installation
 
-* Put @vimbundle@ from @bin/vimbundle@ to a directory from your @PATH@;
-* Install "https://github.com/tpope/vim-pathogen":@pathogen@ from author's repo or pick from here (copy @_vim/autoload/pathogen.vim@ to @~/.vim/autoload/@;
+* Put @vimbundle@ from to a directory from your @PATH@;
+* Install "https://github.com/tpope/vim-pathogen":pathogen from author's repo;
+* Add this to your @.vimrc@: @call pathogen#runtime_append_all_bundles("bundle-enabled")@
 * Create two empty directories in @~/.vim@: @bundles-available@ and @bundles-enabled@;
 * Put your vim bundles in first one and manage them through @vimbundle@!
 

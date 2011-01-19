@@ -36,22 +36,22 @@ Let see how our directory structure looks like with only one installed bundle (v
 
 Now we can list available bundles:
 
-bc.. vimbundle list_available
+bc.. user@host$ vimbundle list_available
 vimball
 
 p. Now lets enable @vimball@:
 
-bc.. vimbundle enable vimball
+bc.. user@host$ vimbundle enable vimball
 Bundle vimball enabled
 
 p. Lets see available list again:
 
-bc.. vimbundle list_available
+bc.. user@host$ vimbundle list_available
 *vimball
 
 p. To disable, we can do
 
-bc.. vimbundle disable vimball
+bc.. user@host$ vimbundle disable vimball
 Bundle vimball disabled
 
 p. There are also @list_enabled@ subcommand, but @list_available@ should suffice too.

@@ -33,7 +33,7 @@ def get_action_by_name(cmd_name):
 
 
 def _print_dir_listing(dirname):
-    print '\n'.join(sorted(get_bundles(dirname)))
+    print('\n'.join(sorted(get_bundles(dirname))))
 
 
 @register_command()
@@ -47,7 +47,7 @@ def list_available(available_bundles_dir, enabled_bundles_dir, **kwargs):
     enabled = set(get_bundles(enabled_bundles_dir))
 
     bundles = (b if b not in enabled else '*' + b for b in sorted(available))
-    print '\n'.join(bundles)
+    print('\n'.join(bundles))
 
 
 def get_bundles(dirname):
@@ -67,7 +67,7 @@ def enable(to_enable, available_bundles_dir, enabled_bundles_dir, **kwargs):
         raise ValueError("Bundle already enabled: %s" % to_enable)
 
     os.symlink(available_path, enabled_path)
-    print "Bundle %s enabled" % to_enable
+    print("Bundle %s enabled" % to_enable)
 
 
 @register_command()
@@ -78,7 +78,7 @@ def disable(to_disable, available_bundles_dir, enabled_bundles_dir, **kwargs):
 
     enabled_path = os.path.join(enabled_bundles_dir, to_disable)
     os.remove(enabled_path)
-    print "Bundle %s disabled" % to_disable
+    print("Bundle %s disabled" % to_disable)
 
 
 def command_argparser(command):
@@ -127,7 +127,7 @@ def main():
     main_parser = argparse.ArgumentParser(
             description='Vim bundles management utility', add_help=False)
     main_parser.add_argument('action', action='store',
-            type=BundleManager.get_action)
+            type=BundleManager.get_action, default='list_available', nargs='?')
     main_parser.add_argument('--config', dest='config_path', action='store',
             default=get_default_config_path())
     main_parser.add_argument('--vimdir', dest='vim_dir', action='store',
@@ -144,8 +144,8 @@ def main():
 
     try:
         manager.perform_action()
-    except BaseException, e:
-        print e
+    except BaseException as e:
+        print(e)
 
 
 if __name__ == '__main__':

@@ -115,6 +115,11 @@ class BundleManager(object):
 
         self._kwargs = kwargs
 
+        if not os.path.isdir(kwargs['available_bundles_dir']):
+          os.mkdir(kwargs['available_bundles_dir'])
+        if not os.path.isdir(kwargs['enabled_bundles_dir']):
+          os.mkdir(kwargs['enabled_bundles_dir'])
+
     def perform_action(self):
         return self.action(**self._kwargs)
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import argparse
 
 AVAILABLE_BUNDLES_DIRNAME = 'bundle-available'
@@ -89,15 +90,15 @@ def command_argparser(command):
 
 
 @command_argparser(disable)
-def disable_argparser():
-    p = argparse.ArgumentParser()
+def disable_argparser(**argparse_kwargs):
+    p = argparse.ArgumentParser(**argparse_kwargs)
     p.add_argument('to_disable')
     return p
 
 
 @command_argparser(enable)
-def enable_argparser():
-    p = argparse.ArgumentParser()
+def enable_argparser(**argparse_kwargs):
+    p = argparse.ArgumentParser(**argparse_kwargs)
     p.add_argument('to_enable')
     return p
 
@@ -118,27 +119,34 @@ class BundleManager(object):
     def perform_action(self):
         return self.action(**self._kwargs)
 
-    @staticmethod
-    def get_action(cmd_name):
-        return get_action_by_name(cmd_name)
+    get_action = staticmethod(get_action_by_name)
+    get_commands = staticmethod(COMMANDS.keys)
 
 
 def main():
     main_parser = argparse.ArgumentParser(
-            description='Vim bundles management utility', add_help=False)
+            description='Vim bundles management utility', add_help=True)
     main_parser.add_argument('action', action='store',
             type=BundleManager.get_action, default='list_available', nargs='?')
+    main_parser.add_argument('-c', '--list-commands', dest='list_commands',
+            action='store_true', default=False, help='list available commands')
     main_parser.add_argument('--config', dest='config_path', action='store',
             default=get_default_config_path())
     main_parser.add_argument('--vimdir', dest='vim_dir', action='store',
             default=get_vim_path())
 
     parsed_args, rest_args = main_parser.parse_known_args()
+
+    if parsed_args.list_commands:
+        print '\n'.join(BundleManager.get_commands())
+        return 0
+
     if hasattr(parsed_args.action, 'get_argparser'):
-        command_argparser = parsed_args.action.get_argparser()
+        command_argparser = parsed_args.action.get_argparser(
+                add_help=False)
         command_argparser.parse_args(args=rest_args, namespace=parsed_args)
     else:
-        argparse.ArgumentParser().parse_args(rest_args)
+        main_parser.parse_args(rest_args)
 
     manager = BundleManager(**parsed_args.__dict__)
 
@@ -146,7 +154,8 @@ def main():
         manager.perform_action()
     except BaseException as e:
         print(e)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
